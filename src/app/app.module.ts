@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,41 +16,35 @@ import * as Sentry from '@sentry/angular';
 import { Router } from '@angular/router';
 import { SnowModule } from './core/snow/snow.module';
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    NzSpinModule,
-    NzIconModule.forRoot([]),
-    environment.production ? [] : AkitaNgDevtools,
-    AkitaNgRouterStoreModule,
-    QuillModule.forRoot(),
-    SnowModule
-  ],
-  providers: [
-    {
-      provide: NG_ENTITY_SERVICE_CONFIG,
-      useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }
-    },
-    {
-      provide: ErrorHandler,
-      useValue: Sentry.createErrorHandler()
-    },
-    {
-      provide: Sentry.TraceService,
-      deps: [Router],
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => () => {},
-      deps: [Sentry.TraceService],
-      multi: true,
-    },
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        NzSpinModule,
+        NzIconModule.forRoot([]),
+        environment.production ? [] : AkitaNgDevtools,
+        AkitaNgRouterStoreModule,
+        QuillModule.forRoot(),
+        SnowModule], providers: [
+        {
+            provide: NG_ENTITY_SERVICE_CONFIG,
+            useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }
+        },
+        {
+            provide: ErrorHandler,
+            useValue: Sentry.createErrorHandler()
+        },
+        {
+            provide: Sentry.TraceService,
+            deps: [Router],
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: () => () => { },
+            deps: [Sentry.TraceService],
+            multi: true,
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
