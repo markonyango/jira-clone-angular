@@ -13,9 +13,10 @@ export interface JProject {
   users: JUser[];
 }
 
-// eslint-disable-next-line no-shadow
-export enum ProjectCategory {
-  SOFTWARE = 'Software',
-  MARKETING = 'Marketing',
-  BUSINESS = 'Business'
-}
+type ProjectCategory = (typeof ProjectCategory)[keyof typeof ProjectCategory]
+
+export const ProjectCategory = {
+  SOFTWARE: 'Software',
+  MARKETING: 'Marketing',
+  BUSINESS: 'Business'
+} as const;
