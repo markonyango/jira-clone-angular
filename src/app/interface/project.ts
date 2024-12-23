@@ -13,10 +13,10 @@ export interface JProject {
   users: JUser[];
 }
 
-type ProjectCategory = (typeof ProjectCategory)[keyof typeof ProjectCategory]
+// type ProjectCategory = (typeof ProjectCategory)[keyof typeof ProjectCategory]
 
-export const ProjectCategory = {
-  SOFTWARE: 'Software',
-  MARKETING: 'Marketing',
-  BUSINESS: 'Business'
-} as const;
+export enum ProjectCategory {
+  SOFTWARE = 'Software',
+  MARKETING = 'Marketing',
+  BUSINESS = 'Business'
+};
