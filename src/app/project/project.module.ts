@@ -2,7 +2,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentLoaderModule } from '@ngneat/content-loader';
 import { AutofocusDirective } from '@trungk18/core/directives/autofocus.directive';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
@@ -33,6 +32,7 @@ import { FullIssueDetailComponent } from './pages/full-issue-detail/full-issue-d
 import { SettingsComponent } from './pages/settings/settings.component';
 import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,6 @@ import { ProjectComponent } from './project.component';
     FormsModule,
     ReactiveFormsModule,
     JiraControlModule,
-    ContentLoaderModule,
     QuillModule
   ]
 })

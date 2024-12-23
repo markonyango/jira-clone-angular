@@ -1,8 +1,5 @@
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ErrorHandler, NgModule, inject, provideAppInitializer } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
@@ -15,10 +12,14 @@ import { QuillModule } from 'ngx-quill';
 import * as Sentry from '@sentry/angular';
 import { Router } from '@angular/router';
 import { SnowModule } from './core/snow/snow.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
-@NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        BrowserAnimationsModule,
+@NgModule({
+    declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [
+        BrowserModule,
         ReactiveFormsModule,
         AppRoutingModule,
         NzSpinModule,
@@ -27,22 +28,20 @@ import { SnowModule } from './core/snow/snow.module';
         AkitaNgRouterStoreModule,
         QuillModule.forRoot(),
         SnowModule], providers: [
-        {
-            provide: NG_ENTITY_SERVICE_CONFIG,
-            useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }
-        },
-        {
-            provide: ErrorHandler,
-            useValue: Sentry.createErrorHandler()
-        },
-        {
-            provide: Sentry.TraceService,
-            deps: [Router],
-        },
-        provideAppInitializer(() => {
-        const initializerFn = (() => () => { })(inject(Sentry.TraceService));
-        return initializerFn();
-      }),
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
-export class AppModule {}
+            {
+                provide: NG_ENTITY_SERVICE_CONFIG,
+                useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }
+            },
+            {
+                provide: ErrorHandler,
+                useValue: Sentry.createErrorHandler()
+            },
+            {
+                provide: Sentry.TraceService,
+                deps: [Router],
+            },
+            provideHttpClient(withInterceptorsFromDi()),
+            provideAnimations()
+        ]
+})
+export class AppModule { }

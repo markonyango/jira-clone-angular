@@ -3,11 +3,11 @@ import { ProjectConst } from '@trungk18/project/config/const';
 import { JProject, ProjectCategory } from '@trungk18/interface/project';
 import { ProjectQuery } from '@trungk18/project/state/project/project.query';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
 import { ProjectService } from '@trungk18/project/state/project/project.service';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NoWhitespaceValidator } from '@trungk18/core/validators/no-whitespace.validator';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
     templateUrl: './settings.component.html',
